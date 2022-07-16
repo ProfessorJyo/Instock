@@ -1,0 +1,21 @@
+@use './partials/variables' as *;
+@use './partials/mixins' as*;
+@use './partials/fonts' as *;
+
+.footer{
+    background-color: $color-light-grey;
+    padding: 2.5rem 0;
+
+    @include tablet {
+        padding: 5rem 0 2.5rem;
+    }
+
+    @include desktop {
+        padding: 7.5rem 0 2.5rem;
+    }
+
+    &__text{
+        color:$color-slate;
+        text-align: center;
+    }
+}
