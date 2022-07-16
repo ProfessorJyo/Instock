@@ -3,20 +3,19 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 
 function App() {
-  const defaultPrevent = (event) => {
-    event.preventDefault();
-  };
+
 
   return (
     <BrowserRouter>
-      {/* <Header defaultPrevent={defaultPrevent} /> */}
       <Switch>
-        <Route path="/warehouses" />
-        <Route path="/warehouse:id" />
-        <Route path="/inventories" />
-        <Route path="/inventory:id" />
-
-        {/* // <Redirect exact path="/" component={MainPage} />  */}
+        <Route path='/warehouse' />
+        <Route path='/warehouse/add' />
+        <Route path='/warehouse/:id' />
+        <Route path='/warehouse/:id/edit' />
+        <Route path='/inventory' />
+        <Route path='/inventory/add' />
+        <Route path='/inventory/:id' />
+        <Route path='/inventory/:id/edit' />
       </Switch>
     </BrowserRouter>
   );
