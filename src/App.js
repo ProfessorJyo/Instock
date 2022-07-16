@@ -9,9 +9,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header defaultPrevent={defaultPrevent} />
+      {/* <Header defaultPrevent={defaultPrevent} /> */}
       <Switch>
-        {/* <Route exact path="/" component={MainPage} /> */}
+        <Route path="/warehouses" />
+        <Route path="/warehouse:id" />
+        <Route path="/inventories" />
+        <Route path="/inventory:id" />
+
+        {/* // <Redirect exact path="/" component={MainPage} />  */}
       </Switch>
     </BrowserRouter>
   );
