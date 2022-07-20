@@ -1,6 +1,6 @@
-@use './partials/variables' as *;
-@use './partials/mixins' as*;
-@use './partials/fonts' as *;
+@use '../../Styles/Partials/variables' as *;
+@use '../../Styles/Partials/mixins' as*;
+@use '../../Styles/Partials/fonts' as *;
 
 .footer{
     background-color: $color-light-grey;
