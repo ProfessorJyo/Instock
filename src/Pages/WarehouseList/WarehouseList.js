@@ -17,6 +17,7 @@ const WarehouseList = () =>{
             console.log(error)
         })
     }, [])
+    
     return(
         <>
             <SearchHeader title={'Warehouses'} buttonText={'+ Add New Warehouse'}/>

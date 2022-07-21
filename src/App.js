@@ -7,6 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path='/' component={WarehouseList}/>
         <Route path='/warehouse' />
         <Route path='/warehouse/add' />
         <Route path='/warehouse/:id' />
