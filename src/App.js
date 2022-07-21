@@ -4,15 +4,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 
 function App() {
-  // const defaultPrevent = (event) => {
-  //   event.preventDefault();
-  // };
-
   return (
     <BrowserRouter>
-      {/* <Header defaultPrevent={defaultPrevent} /> */}
       <Switch>
-        <Route exact path="/" component={WarehouseList}/>
+        <Route path='/warehouse' />
+        <Route path='/warehouse/add' />
+        <Route path='/warehouse/:id' />
+        <Route path='/warehouse/:id/edit' />
+        <Route path='/inventory' />
+        <Route path='/inventory/add' />
+        <Route path='/inventory/:id' />
+        <Route path='/inventory/:id/edit' />
       </Switch>
     </BrowserRouter>
   );
