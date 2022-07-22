@@ -1,6 +1,7 @@
 import "./Styles/App.scss";
 import WarehouseList from "./Pages/WarehouseList/WarehouseList"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import PageHeader from "./Components/Header/Header";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/inventory/:id' />
         <Route path='/inventory/:id/edit' />
       </Switch>
+      <Footer defaultPrevent={defaultPrevent} />
     </BrowserRouter>
   );
 }
