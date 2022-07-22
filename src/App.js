@@ -8,14 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/warehouse' />
-        <Route path='/warehouse/add' />
-        <Route path='/warehouse/:id' />
-        <Route path='/warehouse/:id/edit' />
-        <Route path='/inventory' />
-        <Route path='/inventory/add' />
-        <Route path='/inventory/:id' />
-        <Route path='/inventory/:id/edit' />
+        <Route path='/' exact component={WarehousePage} />
+        <Route path='/warehouse'  component={WarehousePage}/>
+        <Route path='/inventory' component={InventoryPage}/>
       </Switch>
     </BrowserRouter>
   );
