@@ -38,6 +38,16 @@
             @include tablet {
                 padding: 2rem 2rem 1.255rem;
             }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+                cursor: pointer;
+                
+                &:visited {  
+                  color: inherit;
+                }
+            }
         }
 
         &-left {

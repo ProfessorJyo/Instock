@@ -1,50 +1,56 @@
 import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import "./InventoryItemDetails.scss";
 import editLogo from '../../Assets/Icons/edit-24px-white.svg';
+import axios from 'axios';
 
 const InventoryItemDetails = () => {
-    const props = { 
-        warehouseName: "Manhattan",
-        itemName: "Gym Bag",
-        description: "Made out of military-grade synthetic materials, this gym bag is highly durable, water resistant, and easy to clean.",
-        category: "Gear",
-        status: "Out of Stock",
-        quantity: 1
-    }
 
-    const { itemName, warehouseName, description, category, quantity, status } = props;
+    const params = useParams();
     const [inStock, setInStock] = useState(true);
-    
+    const [itemDetails, setItemDetails] = useState({});
+
     useEffect (() => {
-        if (status === "In Stock" && quantity > 0) {
-            setInStock(true);
-        }
-        else {
-            setInStock(false);
-        }
-    }, [props]);
+        axios.get(`http://localhost:8080/inventory/${params.id}`).then(res => {
+            setItemDetails(res.data[0]);
+            if(itemDetails.status === "In Stock" && itemDetails.quantity > 0) {
+                setInStock(true);
+            }
+            else {
+                setInStock(false);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+
     
     return (
         <section className='inv-details__wrapper'>
             <div className='inv-details__header-wrapper'>
                 <div className='inv-details__header-left'>
-                    <div className='inv-details__back'></div>
-                    <h2 className='inv-details__item'>{itemName}</h2>
+                    <Link to = {`/inventory`}>
+                        <div className='inv-details__back'></div>
+                    </Link>
+                    <h2 className='inv-details__item'>{itemDetails?.itemName}</h2>
                 </div>
                 <div className='inv-details__header-right'>
-                    <div className='inv-details__edit'>
-                        <img src={editLogo} />
-                        <p>Edit</p>
-                    </div>
-                    <div className='inv-details__edit-mobile'></div>
+                    <Link to = {`/inventory/edit/${params.id}`}>
+                        <div className='inv-details__edit'>
+                            <img src={editLogo} />
+                            <p>Edit</p>
+                        </div>
+                        <div className='inv-details__edit-mobile'></div>
+                    </Link>
                 </div>
             </div>
             <div className='inv-details'>
                 <div className='inv-details__left'>
                     <h3 className='inv-details__subtitle'>ITEM DESCRIPTION:</h3>
-                    <p className='inv-details__description'>{description}</p>
+                    <p className='inv-details__description'>{itemDetails?.description}</p>
                     <h3 className='inv-details__subtitle'>CATEGORY:</h3>
-                    <p className='inv-details__category'>{category}</p>
+                    <p className='inv-details__category'>{itemDetails?.category}</p>
                 </div>
                 <div className='inv-details__right'>
                     <div className='inv-details__right-top'>
@@ -60,12 +66,12 @@ const InventoryItemDetails = () => {
                         </div>
                         <div className='inv-details__quantity-wrapper'>
                             <h3 className='inv-details__subtitle'>QUANTITY:</h3>
-                            <p className='inv-details__quantity'>{quantity}</p>
+                            <p className='inv-details__quantity'>{itemDetails?.quantity}</p>
                         </div>
                     </div>
                     <div className='inv-details__right-bottom'>
                         <h3 className='inv-details__subtitle'>WAREHOUSE:</h3>
-                        <p className='inv-details__warehouse'>{warehouseName}</p>                
+                        <p className='inv-details__warehouse'>{itemDetails?.warehouseName}</p>                
                     </div>
                 </div>
             </div>
