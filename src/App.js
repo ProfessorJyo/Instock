@@ -14,6 +14,7 @@ function App() {
       <Switch>
         {/* <Route exact path="/" component={MainPage} /> */}
       </Switch>
+      <Footer defaultPrevent={defaultPrevent} />
     </BrowserRouter>
   );
 }
