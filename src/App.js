@@ -5,8 +5,6 @@ import InventoryPage from "./Pages/Inventory/InventoryPage";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
-
-
   return (
     <BrowserRouter>
       <Switch>
