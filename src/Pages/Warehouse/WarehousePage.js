@@ -8,7 +8,6 @@ function WarehousePage()  {
     return (<>
         <PageHeader isActive='Warehouse' />
         <div className="component-wrapper">
-
                 <Switch>
                     <Route path='/' exact component={Footer} />
                     <Route path='/warehouse' exact component={Footer} />
