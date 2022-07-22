@@ -2,7 +2,9 @@ import logo from '../../Assets/Logo/InStock-Logo.svg'
 import {Link} from 'react-router-dom'
 import './Header.scss'
 
-const PageHeader = ({path}) => {
+const PageHeader = (props) => {
+    const { isActive } = props;
+    
     return (
         <nav className="page-header">
             <div className="page-header__logo-wrapper">
@@ -10,12 +12,12 @@ const PageHeader = ({path}) => {
             </div>
             <div className="page-header__wrapper">
                 <Link 
-                    className={path === "/" ? "page-header__link page-header__link--active" : "page-header__link"} 
+                    className={isActive === "Warehouse" ? "page-header__link page-header__link--active" : "page-header__link"} 
                     to="/">
                         Warehouses
                 </Link>
                 <Link 
-                    className={path === "/inventory" ? "page-header__link  page-header__link--active" : "page-header__link"} 
+                    className={isActive === "Inventory" ? "page-header__link  page-header__link--active" : "page-header__link"} 
                     to="/inventory">
                         Inventory
                 </Link>

@@ -1,4 +1,47 @@
-.form-wrapper {
+@use "../../Styles/Partials/variables";
+
+.component-wrapper {
+  position: relative;
+  background-color: variables.$color-white;
+  z-index: 1;
+  margin: -4rem 11.7rem 0;
+  width: 70%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  .heading {
+    padding-left: 1.5rem;
+  }
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .warehouse-details {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      padding: 0 1.5rem;
+      //   padding-right: 8rem;
+      border-right: 1px solid variables.$color-slate;
+
+      &__form {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      padding: 0 1.5rem;
+
+      &__form {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
 }
