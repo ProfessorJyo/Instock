@@ -13,16 +13,15 @@ const InventoryItemDetails = () => {
     useEffect (() => {
         axios.get(`http://localhost:8080/inventory/${params.id}`).then(res => {
             setItemDetails(res.data[0]);
+            if(itemDetails?.status === "In Stock" && itemDetails?.quantity > 0) {
+                setInStock(true);
+            }
+            else {
+                setInStock(false);
+            }
         }).catch(err => {
             console.log(err);
         });
-
-        if(itemDetails.status === "In Stock" && itemDetails.quantity > 0) {
-            setInStock(true);
-        }
-        else {
-            setInStock(false);
-        }
 
     }, [itemDetails, params]);
 
