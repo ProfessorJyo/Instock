@@ -2,8 +2,10 @@ import './WarehouseRow.scss'
 import ChevronIcon from '../../Assets/Icons/chevron_right-24px.svg'
 import BinIcon from '../../Assets/Icons/delete_outline-24px.svg'
 import PencilIcon from '../../Assets/Icons/edit-24px.svg'
+import { Link } from 'react-router-dom'
 
-const SearchHeader = (props) => {  
+const WarehouseRow = (props) => {  
+    
     return(
         <>
             <div className='warehouseRow'>
@@ -12,8 +14,10 @@ const SearchHeader = (props) => {
                         <p className='warehouseRow__header'>WAREHOUSE</p>
                     </div>
                     <div className='warehouseRow__subContainer'>
-                        <p className='warehouseRow__text warehouseRow__text--primary'>{props.warehouseName}</p>
-                        <img className='warehouseRow__icon' src={ChevronIcon} alt="Chevron right arrow icon" />
+                        <Link className='warehouseRow__link' to={`${props.id}`}>
+                            <p className='warehouseRow__text warehouseRow__text--primary'>{props.warehouseName}</p>
+                            <img className='warehouseRow__icon' src={ChevronIcon} alt="Chevron right arrow icon" />
+                        </Link>
                     </div>
                 </div>
                 <div className='warehouseRow__container warehouseRow__container--secondary'>
@@ -50,4 +54,4 @@ const SearchHeader = (props) => {
     )
 }
 
-export default SearchHeader;
+export default WarehouseRow;

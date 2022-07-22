@@ -3,12 +3,10 @@
 @use '../../Styles/Partials/fonts' as*;
 
 .searchHeader{
-    border: 1px solid black;
-    margin: 0 1rem;
+
     &__header-container{
         display: flex;
         flex-direction: column;
-        
         padding:  0 1.5rem 1.5rem 1.5rem ;
     }
 
@@ -28,16 +26,17 @@
     }
 
     &__input{
-        border: 1px solid $color-slate;
+        border: 1.5px solid $color-cloud;
         border-radius: 20px;
         height: 2.25rem;
-        width: 92%;
-        padding-left: 1rem;
+        width: 100%;
+        text-indent: 1rem;
+        box-sizing: border-box;
     }
 
     &__input-icon{
         position: absolute;
-        top: .5rem;
+        top: .4rem;
         right: 1rem;
     }
 
@@ -95,9 +94,8 @@
         }
 
         &__button{
-            height: 2.675rem;
+            height: 2.375rem;
         }
-
     }
 
     @include desktop{

@@ -3,6 +3,7 @@ import axios from "axios";
 import SearchHeader from '../../Components/SearchHeader/SearchHeader';
 import WarehouseRow from '../../Components/WarehouseRow/WarehouseRow'
 import TableHeader from '../../Components/TableHeader/TableHeader'
+import './WarehouseList.scss'
 
 const WarehouseList = () =>{
 
@@ -17,13 +18,14 @@ const WarehouseList = () =>{
             console.log(error)
         })
     }, [])
-    
+
     return(
-        <>
+        <div className='warehouse-wrapper'>
             <SearchHeader title={'Warehouses'} buttonText={'+ Add New Warehouse'}/>
             <TableHeader/>
             {data.map((singleWarehouse) => {
                 return <WarehouseRow 
+                id={singleWarehouse.id}
                 warehouseName={singleWarehouse.name}
                 address={singleWarehouse.address}
                 city={singleWarehouse.city}
@@ -32,7 +34,7 @@ const WarehouseList = () =>{
                 phone={singleWarehouse.contact.phone}
                 email={singleWarehouse.contact.email}/>
             })} 
-        </>
+        </div>
     )
 }
 

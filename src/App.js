@@ -1,24 +1,18 @@
 import "./Styles/App.scss";
-import WarehouseList from "./Pages/WarehouseList/WarehouseList"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import PageHeader from "./Components/Header/Header";
-
+import WarehousePage from "./Pages/Warehouse/WarehousePage";
+import InventoryPage from "./Pages/Inventory/InventoryPage";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/' component={WarehouseList}/>
-        <Route path='/warehouse' />
-        <Route path='/warehouse/add' />
-        <Route path='/warehouse/:id' />
-        <Route path='/warehouse/:id/edit' />
-        <Route path='/inventory' />
-        <Route path='/inventory/add' />
-        <Route path='/inventory/:id' />
-        <Route path='/inventory/:id/edit' />
+        <Route path='/' exact component={WarehousePage} />
+        <Route path='/warehouse'  component={WarehousePage}/>
+        <Route path='/inventory' component={InventoryPage}/>
       </Switch>
-      <Footer defaultPrevent={defaultPrevent} />
+      <Footer />
     </BrowserRouter>
   );
 }
