@@ -1,5 +1,6 @@
 import "./Styles/App.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import PageHeader from "./Components/Header/Header";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path='/warehouse'  component={WarehousePage}/>
         <Route path='/inventory' component={InventoryPage}/>
       </Switch>
+      <Footer defaultPrevent={defaultPrevent} />
     </BrowserRouter>
   );
 }
