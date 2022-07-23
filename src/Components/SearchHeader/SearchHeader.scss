@@ -53,6 +53,10 @@
         font-weight: 600;
         height: 2.25rem;
         width: 100%;
+        &:hover{
+            cursor:pointer;
+            background-color: $color-graphite;
+        }
     }
 
     @include tablet{
@@ -86,6 +90,7 @@
 
         &__input{
             height: 2.375rem;
+            font-size: .875rem;
         }
 
         &__button-container{
@@ -95,6 +100,7 @@
 
         &__button{
             height: 2.375rem;
+            font-size: 13px;
         }
     }
 
