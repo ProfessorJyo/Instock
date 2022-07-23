@@ -26,7 +26,7 @@ const InventoryListRow = (props) => {
                         <p className='inventoryListRow__header'>INVENTORY ITEM</p>
                     </div>
                     <div className='inventoryListRow__subContainer'>
-                        <Link className='inventoryListRow__link' to={`${props.itemID}`}>
+                        <Link className='inventoryListRow__link' to={`/inventory/${props.itemID}`}>
                             <p className='inventoryListRow__text inventoryListRow__text--primary'>{props.item}</p>
                             <img className='inventoryListRow__icon' src={ChevronIcon} alt="Chevron right arrow icon" />
                         </Link>
