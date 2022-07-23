@@ -10,6 +10,10 @@ const WarehouseList = () =>{
     const [data, setData] = useState([])
 
     useEffect(()=>{
+        requestWarehouseList();
+    }, [])
+
+    const requestWarehouseList = () => {
         axios.get('http://localhost:8080/warehouse')
         .then(result =>{
             setData(result.data)
@@ -17,14 +21,21 @@ const WarehouseList = () =>{
         .catch(error =>{
             console.log(error)
         })
-    }, [])
+    }
 
     return(
-        <div className='warehouse-wrapper'>
+        <div className='warehouseList__wrapper-container'>
             <SearchHeader title={'Warehouses'} buttonText={'+ Add New Warehouse'}/>
-            <TableHeader/>
+            <TableHeader
+             className={'warehouseList'}
+             firstHeader={'WAREHOUSE'} 
+             secondHeader={'ADDRESS'} 
+             thirdHeader={'CONTACT NAME'} 
+             fourthHeader={'CONTACT INFORMATION'} 
+             fifthHeader={null}
+             sixthHeader={'ACTIONS'}/>
             {data.map((singleWarehouse) => {
-                return <WarehouseRow 
+                return <WarehouseRow
                 key={singleWarehouse.id}
                 id={singleWarehouse.id}
                 warehouseName={singleWarehouse.name}
@@ -33,7 +44,8 @@ const WarehouseList = () =>{
                 country={singleWarehouse.country}
                 contact={singleWarehouse.contact.name}
                 phone={singleWarehouse.contact.phone}
-                email={singleWarehouse.contact.email}/>
+                email={singleWarehouse.contact.email}
+                onDataChange={requestWarehouseList}/>
             })} 
         </div>
     )
