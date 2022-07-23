@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import "./EditInventory.scss";
 import axios from 'axios';
+import errorIcon from '../../Assets/Icons/error-24px.svg'
 
 const EditInventory = () => {
-
+    const history = useHistory();
     const params = useParams();
     const [inStock, setInStock] = useState(true);
-    const [itemDetails, setItemDetails] = useState({});
+    const [itemDetails, setItemDetails] = useState({
+        itemName: "",
+        warehouseName: "",
+        status: "",
+        quantity: 0,
+        description: "",
+        id: "",
+        warehouseId: "",
+
+    });
+    const [warehouses, setWarehouses] = useState({});
+    const [nameError, setNameError] = useState(false);
+    const [descError, setDescError] = useState(false);
+    const [quantityError, setQuantityError] = useState(false);
 
     useEffect (() => {
         axios.get(`http://localhost:8080/inventory/${params.id}`).then(res => {
@@ -21,85 +35,144 @@ const EditInventory = () => {
         }).catch(err => {
             console.log(err);
         });
+        axios.get(`http://localhost:8080/warehouse/`).then(res => {
+            setWarehouses(res.data);   
+        });
 
-    }, [itemDetails, params]);
+    }, [params]);
 
-    const handlePublish = async (e) => {
+
+    const handleFormChange = e => {
+        setItemDetails({...itemDetails, [e.target.name]: e.target.value});
+        if (e.target.name === 'status') {
+            if(e.target.value === "In Stock") {
+                setInStock(true);
+            }
+            else {
+                setInStock(false);
+            }
+        }
+    }
+
+    const handleSave = e => {
         e.preventDefault();
+        console.log(e);
         
+        e.target[0].classList.remove('error-state');
         e.target[1].classList.remove('error-state');
-        e.target[2].classList.remove('error-state');
+        e.target[5].classList.remove('error-state');
 
         let emptyValue = false;
-        if (e.target[1].value === '') { 
-            e.target[1].classList.add('error-state');
+        if (e.target[0].value === '') { 
+            e.target[0].classList.add('error-state');
+            setNameError(true);
             emptyValue = true;
+        } else {
+            setNameError(false);
         }
-        if (e.target[2].value === '') {
-            e.target[2].classList.add('error-state');
+        if (e.target[1].value === '') {
+            e.target[1].classList.add('error-state');
+            setDescError(true);
             emptyValue = true;
+        } else {
+            setDescError(false);
+        }
+        if (e.target[5].value <= '0' && itemDetails.status === 'In Stock') {
+            e.target[5].classList.add('error-state');
+            setQuantityError(true);
+            emptyValue = true;
+        } else {
+            setQuantityError(false);
         }
 
         if (emptyValue) {
-            alert('Please fill in the form fields.')
             return false;
         }
         
-        
-        if (window.confirm('Are you sure you want to update?')) {
+        console.log(itemDetails);
+        if (window.confirm('Are you sure you want to update this Inventory Item?')) {
             
-            await axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(res => console.log(res)).catch(err => console.log(err));
+            axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(res => console.log(res)).catch(err => console.log(err));
         };
     }
 
+    const handleCancel = () => {
+        if(window.confirm('Are yo sure you want to cancel and go back to the previous page?')) {
+            history.push(`/inventory/${params.id}`);
+        }
+    }
 
-    
+
+    console.log( nameError, descError, quantityError);
     return (
         <section className='inv-edit__wrapper'>
             <div className='inv-edit__header-wrapper'>
-                <div className='inv-edit__header'>
                     <Link to = {`/inventory/${params.id}`}>
                         <div className='inv-edit__back'></div>
                     </Link>
-                    <h2 className='inv-edit__item'>Edit Inventory Item</h2>
-                </div>
+                    <h1 className='inv-edit__item'>Edit Inventory Item</h1>
             </div>
-            <form className='inv-edit'>
-                <div className='inv-edit__left'>
-                    <h2 className='inv-edit__title'>Item Details</h2>
-                    <h3 className='inv-edit__subtitle'>ITEM DESCRIPTION:</h3>
-                    <input className='inv-details__description' ></input>
-                    <h3 className='inv-details__subtitle'>CATEGORY:</h3>
-                    <select className='inv-details__category'>
-                        <option value="Accessories">Accessories</option>                        
-                        <option value="Apparel">Apparel</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Gear">Gear</option>
-                        <option value="Health">Health</option>
-                    </select>
-                </div>
-                <div className='inv-details__right'>
-                <h2 className='inv-edit__title'>Item Availability</h2>
-                    <div className='inv-details__right-top'>
-                        <div className='inv-details__status-wrapper'>
-                            <h3 className='inv-details__subtitle'>STATUS:</h3>
-                            <div className='inv-details__status-tag'>
-                                {inStock ? (
-                                <p className='inv-details__status instock'>IN STOCK</p>
-                                ) : (
-                                <p className='inv-details__status oos'>OUT OF STOCK</p>
-                                )}
+            <form onSubmit={handleSave}>
+                <div className='inv-edit'>
+                    <div className='inv-edit__left'>
+                        <h2 className='inv-edit__title'>Item Details</h2>
+                        <h3 className='inv-edit__subtitle' >Item Name</h3>
+                        <input className='inv-edit__name' name='itemName' value={itemDetails.itemName} onChange={handleFormChange}></input>
+                        <div className={nameError ? 'inv-edit__error' : 'inv-edit__hidden'}>
+                            <img src={errorIcon} alt='' />
+                            <p>This field is required</p>
+                        </div>
+                        <h3 className='inv-edit__subtitle'>Item Description</h3>
+                        <textarea className='inv-edit__description' name='description' value={itemDetails.description} onChange={handleFormChange}></textarea>
+                        <div className={descError ? 'inv-edit__error' : 'inv-edit__hidden'}>
+                            <img src={errorIcon} alt=''/>
+                            <p>This field is required</p>
+                        </div>
+                        <h3 className='inv-edit__subtitle'>Category</h3>
+                        <select className='inv-edit__category' name='category' value={itemDetails.category} onChange={handleFormChange}>
+                            <option value="Accessories">Accessories</option>                        
+                            <option value="Apparel">Apparel</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Gear">Gear</option>
+                            <option value="Health">Health</option>
+                        </select>
+                    </div>
+                    <div className='inv-edit__right'>
+                        <h2 className='inv-edit__title'>Item Availability</h2>
+                        <div className='inv-edit__status-wrapper'>
+                            <h3 className='inv-edit__subtitle'>Status</h3>
+                            <div className='inv-edit__status-tag'>
+                                <div>
+                                    <input className={inStock ? '' : 'unselected-radio'} type="radio" id="inStock" name="status" value="In Stock" checked={inStock} onChange={handleFormChange}/>
+                                    <label className={inStock ? 'inv-edit__status' : 'inv-edit__status inv-edit__status-unselected'} htmlFor="In Stock">In Stock</label>
+                                </div>
+                                <div>
+                                    <input className={inStock ? 'unselected-radio' : ''} type="radio" id="outOfStock" name="status" value="Out Of Stock" checked={!inStock} onChange={handleFormChange}/>
+                                    <label className={inStock ? 'inv-edit__status inv-edit__status-unselected' : 'inv-edit__status'} htmlFor="Out Of Stock">Out Of Stock</label>
+                                </div>
                             </div>
                         </div>
-                        <div className='inv-details__quantity-wrapper'>
-                            <h3 className='inv-details__subtitle'>QUANTITY:</h3>
-                            <p className='inv-details__quantity'>{itemDetails?.quantity}</p>
+                        <div className='inv-edit__quantity-wrapper' hidden={inStock ? false : true}>
+                            <h3 className='inv-edit__subtitle'>Quantity</h3>
+                            <input type='number' min="0" className='inv-edit__quantity' name='quantity' value={itemDetails.quantity} onChange={handleFormChange}></input>
+                        </div>
+                        <div className={quantityError ? 'inv-edit__error' : 'inv-edit__hidden'}>
+                            <img src={errorIcon} alt=''/>
+                            <p>This field is required</p>
+                        </div>
+                        <div className='inv-edit__right-bottom'>
+                            <h3 className='inv-edit__subtitle'>Warehouse</h3>
+                            <select className='inv-edit__warehouse' name='warehouseName' value={itemDetails.warehouseName} onChange={handleFormChange}>
+                                {Array.isArray(warehouses) ? (warehouses.map((w) => (
+                                    <option value={w.name} key={w.id}>{w.name}</option>
+                                ))) : (<option>loading...</option>)}
+                            </select>                
                         </div>
                     </div>
-                    <div className='inv-details__right-bottom'>
-                        <h3 className='inv-details__subtitle'>WAREHOUSE:</h3>
-                        <p className='inv-details__warehouse'>{itemDetails?.warehouseName}</p>                
-                    </div>
+                </div>
+                <div className='inv-edit__button-wrapper'>
+                    <button className='inv-edit__button inv-edit__button-cancel' onClick={handleCancel} >Cancel</button>
+                    <button type="submit" className='inv-edit__button inv-edit__button-save' >Save</button>
                 </div>
             </form>
         </section>
