@@ -1,47 +1,137 @@
-@use "../../Styles/Partials/variables";
+@use '../../Styles/Partials/variables';
+@use '../../Styles/Partials/mixins';
 
 .component-wrapper {
-  position: relative;
   background-color: variables.$color-white;
-  z-index: 1;
-  margin: -4rem 11.7rem 0;
-  width: 70%;
   display: flex;
   flex-direction: column;
+  width: 90%;
+  // padding: 0 2rem;
+  box-shadow: 0px 2px 5px variables.$color-instock-black;
+  position: relative;
+  z-index: 1;
+  top: -3rem;
+  left: 1.2rem;
 
-  .heading {
-    padding-left: 1.5rem;
+  @include mixins.desktop {
+    margin: -4rem 11.7rem 0;
+    width: 70%;
   }
 
-  .form-wrapper {
+  &__heading {
+    padding-left: 0.5rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid variables.$color-cloud;
+  }
 
-    .warehouse-details {
-      display: flex;
-      flex-direction: column;
+  .header {
+    padding-left: 0.5rem;
+  }
+
+  .warehouse-details {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    &__container {
+      @include mixins.tablet {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid variables.$color-cloud;
+      }
+    }
+
+    &__heading {
+      padding: 0 1rem 0 1rem;
+    }
+    &__contact-heading {
+      padding: 0 1rem 0 1rem;
+    }
+    @include mixins.desktop {
       width: 50%;
       padding: 0 1.5rem;
-      //   padding-right: 8rem;
       border-right: 1px solid variables.$color-slate;
-
-      &__form {
-        display: flex;
-        flex-direction: column;
-      }
     }
 
-    .contact-details {
+    &__warehouse-form {
       display: flex;
       flex-direction: column;
-      width: 50%;
-      padding: 0 1.5rem;
-
-      &__form {
-        display: flex;
-        flex-direction: column;
+      border-bottom: 1px solid variables.$color-cloud;
+      padding-bottom: 3rem;
+      padding: 0 1rem 1.5rem 1rem;
+      @include mixins.tablet {
+        width: 45%;
+        border-right: 1px solid variables.$color-cloud;
+        border-bottom: none;
       }
     }
+
+    &__contact-form {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 3rem;
+      padding: 0 1rem 1.5rem 1rem;
+      @include mixins.tablet {
+        width: 45%;
+      }
+      @include mixins.desktop {
+        width: 50%;
+        padding: 0 1.5rem;
+      }
+    }
+
+    .button-section {
+      padding: 0 1rem 0 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: variables.$color-light-grey;
+      @include mixins.tablet {
+        justify-content: flex-end;
+      }
+
+      a {
+        color: variables.$color-instock-black;
+        background-color: variables.$color-white;
+        text-decoration: none;
+        height: 2.5rem;
+        width: 45%;
+        margin: 2.5rem 0;
+        border-radius: 1.875rem;
+        border: 1px solid variables.$color-slate;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mixins.tablet {
+          width: 10%;
+        }
+      }
+    }
+  }
+}
+.form {
+  height: 1.87rem;
+  border-radius: 1.87rem;
+  border-color: variables.$color-cloud;
+  box-shadow: none;
+  padding-left: 0.625rem;
+}
+.form-error {
+  border-color: variables.$color-red;
+}
+
+#submit-button {
+  color: variables.$color-white;
+  background-color: variables.$color-instock-indigo;
+  height: 2.5rem;
+  width: 45%;
+  margin: 2.5rem 0;
+  border-radius: 1.875rem;
+  @include mixins.tablet {
+    width: 20%;
+    margin-left: 1rem;
   }
 }

@@ -5,6 +5,7 @@
 .page-header{
     background-color:$color-graphite;
     padding: 1.5rem 0 6rem ;
+    position: relative;
 
     @include tablet {
         display: flex;
