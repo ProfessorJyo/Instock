@@ -20,20 +20,30 @@ const WarehouseList = () =>{
     }, [])
 
     return(
-        <div className='warehouse-wrapper'>
+        <div className='warehouseList__wrapper-container'>
             <SearchHeader title={'Warehouses'} buttonText={'+ Add New Warehouse'}/>
-            <TableHeader/>
-            {data.map((singleWarehouse) => {
-                return <WarehouseRow 
-                id={singleWarehouse.id}
-                warehouseName={singleWarehouse.name}
-                address={singleWarehouse.address}
-                city={singleWarehouse.city}
-                country={singleWarehouse.country}
-                contact={singleWarehouse.contact.name}
-                phone={singleWarehouse.contact.phone}
-                email={singleWarehouse.contact.email}/>
-            })} 
+            <TableHeader
+             className={'warehouseList'}
+             firstHeader={'WAREHOUSE'} 
+             secondHeader={'ADDRESS'} 
+             thirdHeader={'CONTACT NAME'} 
+             fourthHeader={'CONTACT INFORMATION'} 
+             fifthHeader={null}
+             sixthHeader={'ACTIONS'}/>
+            <div className='warehouseList__wrapper-subContainer'> 
+                {data.map((singleWarehouse) => {
+                    return <WarehouseRow 
+                    id={singleWarehouse.id}
+                    warehouseName={singleWarehouse.name}
+                    address={singleWarehouse.address}
+                    city={singleWarehouse.city}
+                    country={singleWarehouse.country}
+                    contact={singleWarehouse.contact.name}
+                    phone={singleWarehouse.contact.phone}
+                    email={singleWarehouse.contact.email}
+                    key={singleWarehouse.id}/>
+                })} 
+            </div>
         </div>
     )
 }

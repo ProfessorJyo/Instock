@@ -16,26 +16,55 @@
             display: flex;
             padding: .5rem 0;
 
+            &--hidden{
+                display: none;
+            }
+        }
+
+        // HEADER STYLING ONLY FOR WAREHOUSELIST
+        &__warehouseList-container{
             &--primary{
-                width: 14%;  
+                width: 15%;  
             }
             &--secondary{
                 width: 15%;
             }
             &--tertiary{
-                width: 17%;
+                width: 18%;
             }
             &--quaternary{
-                width: 24%;
+                width: 26%;
             }
             &--quinary{
-                width: 7%;
+                width: 9%;
+            }
+        }
+
+         // HEADER STYLING ONLY FOR INVENTORYLIST
+         &__inventoryList-container{
+            &--primary{
+                width: 17%;  
+            }
+            &--secondary{
+                width: 15%;
+            }
+            &--tertiary{
+                width: 15%;
+            }
+            &--quaternary{
+                width: 15%;
+            }
+            &--quinary{
+                width: 15%;
+            }
+            &--senary{
+                width: 9%;
             }
         }
 
         &__title{
             color: $color-slate;
-            font-size: .75rem;
+            font-size: .875rem;
             font-weight: 600;
             line-height: 1rem;
             margin: 0;
@@ -43,6 +72,9 @@
 
         &__icon{
             height: 1rem;
+            &:hover{
+                cursor:pointer
+            }
         }
     }
 

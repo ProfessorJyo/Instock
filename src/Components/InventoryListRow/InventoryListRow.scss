@@ -2,11 +2,16 @@
 @use '../../Styles/Partials/mixins' as*;
 @use '../../Styles/Partials/fonts' as*;
 
-.warehouseRow{
+.inventoryListRow{
     padding: 0 1rem 1.5rem 1.5rem;
     border-top: 2px solid $color-cloud;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
+
+    &:hover{
+        background-color:$color-indigo-opacity;
+    }
 
     &__container{
         display: flex;
@@ -14,22 +19,26 @@
 
         &--primary{
             order: 1;
-            width: 45%;
+            width: 50%;
         }
         &--secondary{
             order: 3;
-            width: 45%;
+            width: 50%;
         }
         &--tertiary{
             order: 2;
-            width: 45%;
+            width: 50%;
         }
         &--quaternary{
             order: 4;
-            width: 55%;
+            width: 50%;
         }
         &--quinary{
             order: 5;
+            width: 50%;
+        }
+        &--senary{
+            order: 6;
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -60,6 +69,26 @@
         }
     }
 
+    &__status{
+        width: fit-content;
+        height: 1.5rem;
+        padding: 0 .5rem;
+        border-radius: 1.25rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+        
+
+        &--active{
+            background-color:$color-green-opacity ;     
+            color: $color-green;
+        }
+
+        &--inactive{
+           background-color: $color-red-opacity;
+           color: $color-red;
+        }
+    }
+
     &__link{
         display: flex;
         width: fit-content;
@@ -68,6 +97,9 @@
 
     &__icon{     
         height: 1.3rem;
+        &:hover{
+            cursor:pointer
+        }
     }
 
     &__image{
@@ -83,38 +115,42 @@
         justify-content: space-between;
         border-top: none;
         border-bottom: 2px solid $color-cloud;
-        padding: 1rem 1.5rem;
-        height: 4rem;
+        padding: 1.5rem 1.5rem;
 
         &__container{
             display: flex;
    
             &--primary{
                 order: 1;
-                width: 15%;  
+                width: 17%;  
             }
 
             &--secondary{
                 order: 2;
-                width: 16%;
+                width: 15%;
             }
 
             &--tertiary{
                 order: 3;
-                width: 18%;
+                width: 15%;
             }
 
             &--quaternary{
                 order: 4;
-                width: 26%;
+                width: 15%;
             }
 
             &--quinary{
                 order: 5;
+                width: 15%;
+            }
+
+            &--senary{
+                order: 6;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                margin-top: 0;
+                margin: 0;
                 width: 9%;
             }
         }
@@ -135,14 +171,16 @@
     @include desktop {
 
         &__container{
-          
-            &--secondary{
-                width: 20%;
+            &--senary{
+                width: 7%;
+                border: .0625rem solid red;
+                text-align: center;
             }
-
-            &--quinary{
-                width: 4%;
-            }
+        }
+        &__status{
+            width: fit-content;
+            height: 1.625rem;
+            line-height: 1.5rem;
         }
     }
 }
