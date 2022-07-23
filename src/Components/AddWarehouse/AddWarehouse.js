@@ -60,80 +60,82 @@ const AddWarehouse = () => {
 
   return (
     <>
-      <div className='component-wrapper__heading'>
-        <Link to='/warehouse'>
-          <img src={arrowIcon} />
-        </Link>
-        <h1 className='header'>Add a New Warehouse</h1>
-      </div>
-      <form className='warehouse-details' onSubmit={dataHandler}>
-        <div className='warehouse-details__container'>
-          <div className='warehouse-details__warehouse-form'>
-            <h2 className='warehouse-details__heading'>Warehouse details</h2>
-            <label htmlFor='name-form'>Warehouse name</label>
-            <input
-              type='text'
-              className='form'
-              id='name-form'
-              name='warehouse-name'
-              placeholder='Warehouse name'
-            />
-            <label htmlFor='street-form'>Street Address</label>
-            <input
-              type='text'
-              className='form'
-              id='street-form'
-              name='Street-address'
-              placeholder='Street Address'
-            />
-            <label htmlFor='city'>City</label>
-            <input type='text' className='form' id='city-form' name='City' placeholder='City' />
-            <label htmlFor='country-form'>Country</label>
-            <input
-              type='text'
-              className='form'
-              id='country-form'
-              name='Country'
-              placeholder='Country'
-            />
-          </div>
+      <div className='content-wrapper'>
+        <div className='component-wrapper__heading'>
+          <Link to='/warehouse'>
+            <img src={arrowIcon} />
+          </Link>
+          <h1 className='header'>Add a New Warehouse</h1>
+        </div>
+        <form className='warehouse-details' onSubmit={dataHandler}>
+          <div className='warehouse-details__container'>
+            <div className='warehouse-details__warehouse-form'>
+              <h2 className='warehouse-details__heading'>Warehouse details</h2>
+              <label htmlFor='name-form'>Warehouse name</label>
+              <input
+                type='text'
+                className='form'
+                id='name-form'
+                name='warehouse-name'
+                placeholder='Warehouse name'
+              />
+              <label htmlFor='street-form'>Street Address</label>
+              <input
+                type='text'
+                className='form'
+                id='street-form'
+                name='Street-address'
+                placeholder='Street Address'
+              />
+              <label htmlFor='city'>City</label>
+              <input type='text' className='form' id='city-form' name='City' placeholder='City' />
+              <label htmlFor='country-form'>Country</label>
+              <input
+                type='text'
+                className='form'
+                id='country-form'
+                name='Country'
+                placeholder='Country'
+              />
+            </div>
 
-          <div className='warehouse-details__contact-form'>
-            <h2 className='warehouse-details__contact-heading'>Contact details</h2>
-            <label htmlFor='contact-name-form'>Contact name</label>
-            <input
-              type='text'
-              className='form'
-              id='contact-name-form'
-              name='contact-name'
-              placeholder='Contact name'
-            />
-            <label htmlFor='position-form'>Position</label>
-            <input
-              type='text'
-              className='form'
-              id='position-form'
-              name='Street-address'
-              placeholder='Position'
-            />
-            <label htmlFor='phone-number-form'>Phone number</label>
-            <input
-              type='tel'
-              // pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-              className='form'
-              id='phone-number-form'
-              name='City'
-              placeholder='Phone number'
-            />
-            <label htmlFor='email-form'>Email</label>
-            <input type='text' className='form' id='email-form' name='City' placeholder='Email' />
+            <div className='warehouse-details__contact-form'>
+              <h2 className='warehouse-details__contact-heading'>Contact details</h2>
+              <label htmlFor='contact-name-form'>Contact name</label>
+              <input
+                type='text'
+                className='form'
+                id='contact-name-form'
+                name='contact-name'
+                placeholder='Contact name'
+              />
+              <label htmlFor='position-form'>Position</label>
+              <input
+                type='text'
+                className='form'
+                id='position-form'
+                name='Street-address'
+                placeholder='Position'
+              />
+              <label htmlFor='phone-number-form'>Phone number</label>
+              <input
+                type='tel'
+                // pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                className='form'
+                id='phone-number-form'
+                name='City'
+                placeholder='Phone number'
+              />
+              <label htmlFor='email-form'>Email</label>
+              <input type='text' className='form' id='email-form' name='City' placeholder='Email' />
+            </div>
           </div>
-        </div>
-        <div className='button-section'>
-          <Link to='/warehouse'>Cancel</Link>
-          <input type='submit' id='submit-button' value='+ Add warehouse' />
-        </div>
-      </form>
+          <div className='button-section'>
+            <Link to='/warehouse'>Cancel</Link>
+            <input type='submit' id='submit-button' value='+ Add warehouse' />
+          </div>
+        </form>
+      </div>
     </>
   );
 };
