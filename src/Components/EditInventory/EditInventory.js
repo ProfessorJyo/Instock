@@ -68,7 +68,7 @@ const EditInventory = () => {
                 <div className='inv-edit__left'>
                     <h2 className='inv-edit__title'>Item Details</h2>
                     <h3 className='inv-edit__subtitle'>ITEM DESCRIPTION:</h3>
-                    <input className='inv-details__description' >{itemDetails?.description}</input>
+                    <input className='inv-details__description' ></input>
                     <h3 className='inv-details__subtitle'>CATEGORY:</h3>
                     <select className='inv-details__category'>
                         <option value="Accessories">Accessories</option>                        

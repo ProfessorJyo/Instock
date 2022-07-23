@@ -25,6 +25,7 @@ const WarehouseList = () =>{
             <TableHeader/>
             {data.map((singleWarehouse) => {
                 return <WarehouseRow 
+                key={singleWarehouse.id}
                 id={singleWarehouse.id}
                 warehouseName={singleWarehouse.name}
                 address={singleWarehouse.address}

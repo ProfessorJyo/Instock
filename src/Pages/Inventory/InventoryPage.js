@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom";
-import InventoryItemDetails from '../../Components/InventoryItemDetails/InventoryItemDetails'
+import InventoryItemDetails from '../../Components/InventoryItemDetails/InventoryItemDetails';
+import EditInventory from '../../Components/EditInventory/EditInventory';
 import PageHeader from "../../Components/Header/Header";
 import './InventoryPage.scss';
 
@@ -12,7 +13,7 @@ function InventoryPage()  {
                 <Switch>
                     <Route path='/inventory' exact component='' />
                     <Route path='/inventory/add'  component='' /> 
-                    <Route path='/inventory/edit/:id' component='' />
+                    <Route path='/inventory/edit/:id' component={EditInventory} />
                     <Route path='/inventory/:id'  component={InventoryItemDetails} />
                 </Switch>
         </div>
