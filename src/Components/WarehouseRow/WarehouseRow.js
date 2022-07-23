@@ -76,7 +76,7 @@ const WarehouseRow = (props) => {
                         <p className='warehouseRow__text'>{props.email}</p>
                     </div>
                 </div>
-                <div className='warehouseRow__container warehouseRow__container--quinary'>
+                <div className='warehouseRow__container warehouseRow__container--senary'>
                     <img className='warehouseRow__image' src={BinIcon} onClick={openModalDialog}  alt="Garbage Bin Icon Button" />
                     <img className='warehouseRow__image' src={PencilIcon} alt="Pencil Icon Button" />
                 </div>

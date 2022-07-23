@@ -27,15 +27,15 @@
                 width: 15%;  
             }
             &--secondary{
-                width: 15%;
+                width: 18%;
             }
             &--tertiary{
-                width: 18%;
+                width: 20%;
             }
             &--quaternary{
                 width: 26%;
             }
-            &--quinary{
+            &--senary{
                 width: 9%;
             }
         }
@@ -43,7 +43,7 @@
          // HEADER STYLING ONLY FOR INVENTORYLIST
          &__inventoryList-container{
             &--primary{
-                width: 17%;  
+                width: 19%;  
             }
             &--secondary{
                 width: 15%;
@@ -80,14 +80,9 @@
 
     @include desktop {
 
-        &__container{
-          
-            &--secondary{
-                width: 20%;
-            }
-
-            &--quinary{
-                width: 4%;
+        &__inventoryList-container{
+            &--senary{
+                width: 7%;
             }
         }
     }
