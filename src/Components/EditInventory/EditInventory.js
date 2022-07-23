@@ -92,7 +92,8 @@ const EditInventory = () => {
         console.log(itemDetails);
         if (window.confirm('Are you sure you want to update this Inventory Item?')) {
             
-            axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(res => console.log(res)).catch(err => console.log(err));
+            axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(_res => {}).catch(err => console.log(err));
+            history.push(`/inventory/${params.id}`);
         };
     }
 
@@ -171,7 +172,7 @@ const EditInventory = () => {
                     </div>
                 </div>
                 <div className='inv-edit__button-wrapper'>
-                    <button className='inv-edit__button inv-edit__button-cancel' onClick={handleCancel} >Cancel</button>
+                    <button type='button' className='inv-edit__button inv-edit__button-cancel' onClick={handleCancel} >Cancel</button>
                     <button type="submit" className='inv-edit__button inv-edit__button-save' >Save</button>
                 </div>
             </form>

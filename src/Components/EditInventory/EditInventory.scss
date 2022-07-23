@@ -260,6 +260,8 @@ select:focus {
         text-align: center;
         font-weight: 600;
         cursor: pointer;
+        font-family: 'Titillium Web';
+
 
         @include tablet {
             font-size: 0.875rem;
