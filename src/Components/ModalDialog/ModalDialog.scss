@@ -1,0 +1,35 @@
+@use '../../Styles/Partials/variables' as *;
+@use '../../Styles/Partials/mixins' as*;
+@use '../../Styles/Partials/fonts' as*;
+
+.modal-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+
+    @include desktop {
+        /* Both height and width are picked based on trial and error
+         * Width: From style guide, ((63*8) + (24 * 7)) / 16px = 42 rem
+         * Height: About a 3rd of width = 14rem*/
+        margin: calc((100vh - 14rem) / 2) calc((100vw - 42rem) / 2);
+    } 
+
+    &__overlay {
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.75)
+      }
+}

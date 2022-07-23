@@ -24,7 +24,8 @@ const WarehouseList = () =>{
             <SearchHeader title={'Warehouses'} buttonText={'+ Add New Warehouse'}/>
             <TableHeader/>
             {data.map((singleWarehouse) => {
-                return <WarehouseRow 
+                return <WarehouseRow
+                key={singleWarehouse.id}
                 id={singleWarehouse.id}
                 warehouseName={singleWarehouse.name}
                 address={singleWarehouse.address}
