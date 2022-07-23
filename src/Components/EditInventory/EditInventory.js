@@ -26,12 +26,7 @@ const EditInventory = () => {
     useEffect (() => {
         axios.get(`http://localhost:8080/inventory/${params.id}`).then(res => {
             setItemDetails(res.data[0]);
-            if(itemDetails?.status === "In Stock" && itemDetails?.quantity > 0) {
-                setInStock(true);
-            }
-            else {
-                setInStock(false);
-            }
+            updateTheStock(res.data[0]);
         }).catch(err => {
             console.log(err);
         });
@@ -41,9 +36,17 @@ const EditInventory = () => {
 
     }, [params]);
 
+    const updateTheStock = details => {
+        if(details.status === "In Stock" && details.quantity > 0) {
+            setInStock(true);
+        }
+        else {
+            setInStock(false);
+        }
+    }
 
     const handleFormChange = e => {
-        
+
         if (e.target.name === 'warehouseName') {
                 const wh = warehouses.filter(wh => wh.name === e.target.value);
                 console.log(wh[0].id);
