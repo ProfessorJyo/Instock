@@ -23,7 +23,8 @@ const WarehouseRow = (props) => {
         <>
             <ModalDialog 
                 showModalDialog={showModalDialog}
-                content={props.warehouseName}
+                title={`Delete ${props.warehouseName} warehouse?`}
+                content={`Please confirm that you'd like to delete the ${props.warehouseName} from the list of warehouses. You won't be able to undo this action.`}
                 onCancel={closeModalDialog}
                 onDelete={closeModalDialog}>
             </ModalDialog>
