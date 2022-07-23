@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import './WarehouseRow.scss'
+import axios from "axios";
 import ChevronIcon from '../../Assets/Icons/chevron_right-24px.svg'
 import BinIcon from '../../Assets/Icons/delete_outline-24px.svg'
 import PencilIcon from '../../Assets/Icons/edit-24px.svg'
@@ -11,11 +12,21 @@ const WarehouseRow = (props) => {
 
     const [showModalDialog, setShowModalDialog] = useState(false);
     
-    function openModalDialog() {
+    const openModalDialog = () => {
         setShowModalDialog(true);
     }
 
-    function closeModalDialog() {
+    const closeModalDialog = () => {
+        setShowModalDialog(false);
+    }
+
+    const deleteWarehouseCallback = async () => {
+        const response = await axios.delete(`http://localhost:8080/warehouse/${props.id}`);
+
+        if (response.data?.deletedWarehouse) {
+            props.onDataChange();
+        }
+
         setShowModalDialog(false);
     }
 
@@ -26,7 +37,7 @@ const WarehouseRow = (props) => {
                 title={`Delete ${props.warehouseName} warehouse?`}
                 content={`Please confirm that you'd like to delete the ${props.warehouseName} from the list of warehouses. You won't be able to undo this action.`}
                 onCancel={closeModalDialog}
-                onDelete={closeModalDialog}>
+                onDelete={deleteWarehouseCallback}>
             </ModalDialog>
             <div className='warehouseRow'>
                 <div className='warehouseRow__container warehouseRow__container--primary'>
@@ -66,8 +77,7 @@ const WarehouseRow = (props) => {
                     </div>
                 </div>
                 <div className='warehouseRow__container warehouseRow__container--quinary'>
-                    <button onClick={openModalDialog}>TEST ME</button>
-                    <img className='warehouseRow__image' src={BinIcon} alt="Garbage Bin Icon Button" />
+                    <img className='warehouseRow__image' src={BinIcon} onClick={openModalDialog}  alt="Garbage Bin Icon Button" />
                     <img className='warehouseRow__image' src={PencilIcon} alt="Pencil Icon Button" />
                 </div>
             </div>
