@@ -13,7 +13,6 @@ function InventoryPage()  {
                 <Switch>
                     <Route path='/inventory' exact component={InventoryList} />
                     <Route path='/inventory/add'  component='' />
-                    <Route path='/inventory/:id'  component='' />
                     <Route path='/inventory/edit/:id'  component='' />
                     <Route path='/inventory' exact component='' />
                     <Route path='/inventory/add'  component='' /> 
