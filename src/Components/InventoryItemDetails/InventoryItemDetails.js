@@ -23,7 +23,7 @@ const InventoryItemDetails = () => {
             console.log(err);
         });
 
-    }, [itemDetails, params]);
+    }, [params]);
 
 
     

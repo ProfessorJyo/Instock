@@ -43,6 +43,12 @@ const EditInventory = () => {
 
 
     const handleFormChange = e => {
+        
+        if (e.target.name === 'warehouseName') {
+                const wh = warehouses.filter(wh => wh.name === e.target.value);
+                console.log(wh[0].id);
+                setItemDetails({...itemDetails, warehouseId: wh[0].id});
+        }
         setItemDetails({...itemDetails, [e.target.name]: e.target.value});
         if (e.target.name === 'status') {
             if(e.target.value === "In Stock") {
@@ -92,7 +98,7 @@ const EditInventory = () => {
         console.log(itemDetails);
         if (window.confirm('Are you sure you want to update this Inventory Item?')) {
             
-            axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(_res => {}).catch(err => console.log(err));
+            axios.put(`http://localhost:8080/inventory/${params.id}`, itemDetails).then(res => console.log(res)).catch(err => console.log(err));
             history.push(`/inventory/${params.id}`);
         };
     }
