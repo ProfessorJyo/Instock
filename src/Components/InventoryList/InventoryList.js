@@ -11,6 +11,10 @@ const InventoryList = () =>{
     const [data, setData] = useState([])
 
     useEffect(()=>{
+        requestInventoryList();
+    }, [])
+
+    const requestInventoryList = () => {
         axios.get('http://localhost:8080/inventory')
         .then(result =>{
             setData(result.data)
@@ -18,7 +22,7 @@ const InventoryList = () =>{
         .catch(error =>{
             console.log(error)
         })
-    }, [])
+    }
 
     return(
         <div className='inventoryList__wrapper-container'>
@@ -42,6 +46,7 @@ const InventoryList = () =>{
                     quantity={singleInventory.quantity}
                     status={singleInventory.status}
                     warehouseID={singleInventory.warehouseID}
+                    onDataChange={requestInventoryList}
                     key={singleInventory.id}/>
                 })} 
             </div>
