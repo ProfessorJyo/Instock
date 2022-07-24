@@ -66,7 +66,9 @@ const InventoryListRow = (props) => {
                 </div>
                 <div className='inventoryListRow__container inventoryListRow__container--senary'>
                     <img className='inventoryListRow__image' src={BinIcon} alt="Garbage Bin Icon Button" />
-                    <img className='inventoryListRow__image' src={PencilIcon} alt="Pencil Icon Button" />
+                    <Link className='inventoryListRow__link-edit' to={`/inventory/edit/${props.itemID}`}>    
+                        <img className='inventoryListRow__image' src={PencilIcon} alt="Pencil Icon Button" />
+                    </Link>
                 </div>
             </div>
         </>
