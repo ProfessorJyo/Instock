@@ -200,40 +200,6 @@ select:focus {
     
     }
 
-    &__description {
-        resize: none;
-        height: 7.5rem;
-
-        @include tablet {
-            padding-bottom: 2rem;
-        }
-    }
-
-    &__status {
-        height: 1.5rem;
-        padding: 0 .5rem;
-        border-radius: 1.25rem;
-        font-size: 0.813rem;
-        margin: 0;
-        font-weight: 600;
-        line-height: 1.5rem;
-
-        &-tag {
-            display: flex;
-            align-items: center;
-        }
-
-        &-unselected {
-            color: $color-slate;
-        }
-
-        @include tablet {
-            font-size: 0.875rem;
-            line-height: 1.625rem;
-            height: 1.625rem;
-        }
-    }
-
     &__button {
         &-wrapper {
             display: flex;
@@ -321,8 +287,4 @@ select:focus {
 
 .error-state {
     border-color: $color-red;
-}
-
-.unselected-radio {
-    color: $color-cloud;
 }
