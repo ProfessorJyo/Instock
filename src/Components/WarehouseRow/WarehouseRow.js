@@ -45,7 +45,7 @@ const WarehouseRow = (props) => {
                         <p className='warehouseRow__header'>WAREHOUSE</p>
                     </div>
                     <div className='warehouseRow__subContainer'>
-                        <Link className='warehouseRow__link' to={`${props.id}`}>
+                        <Link className='warehouseRow__link' to={`warehouse/${props.id}`}>
                             <p className='warehouseRow__text warehouseRow__text--primary'>{props.warehouseName}</p>
                             <img className='warehouseRow__icon' src={ChevronIcon} alt="Chevron right arrow icon" />
                         </Link>
