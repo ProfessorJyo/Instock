@@ -175,7 +175,7 @@ select:focus {
             }
     }
 
-    &__name, &__description, &__category, &__quantity, &__warehouse {
+    &__input {
         font-size: 0.813rem;
         line-height: 1.25rem;
         margin: 0;
@@ -189,14 +189,15 @@ select:focus {
             font-size: 0.875rem;
             line-height: 1.375rem;
         }
-    }
-
-    &__category {
-        margin-bottom: 1.5rem;
-
-        @include tablet {
-            margin: 0;
+        
+        &--last-row {
+            margin-bottom: 1.5rem;
+    
+            @include tablet {
+                margin: 0;
+            }
         }
+    
     }
 
     &__description {
