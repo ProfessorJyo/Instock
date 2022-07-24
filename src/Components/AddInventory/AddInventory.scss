@@ -150,7 +150,9 @@ select:focus {
     }
 
     &__left {
+        padding-bottom: 1.5rem;
         @include tablet {
+            padding-bottom: 0;
             padding-right: 2rem;
         }
     }
@@ -188,14 +190,6 @@ select:focus {
         @include tablet {
             font-size: 0.875rem;
             line-height: 1.375rem;
-        }
-    }
-
-    &__category {
-        margin-bottom: 1.5rem;
-
-        @include tablet {
-            margin: 0;
         }
     }
 
@@ -324,8 +318,4 @@ select:focus {
 
 .unselected-radio {
     color: $color-cloud;
-}
-
-.placeholder {
-    color: $color-slate;
 }

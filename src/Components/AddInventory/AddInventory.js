@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import "./AddInventory.scss";
 import axios from 'axios';
 import errorIcon from '../../Assets/Icons/error-24px.svg'
 
 const AddInventory = () => {
     const history = useHistory();
-    const params = useParams();
     const [inStock, setInStock] = useState(false);
     const [itemDetails, setItemDetails] = useState({
         itemName: "",
         warehouseName: "",
-        status: "",
+        status: "Out Of Stock",
         quantity: 0,
         category: "",
         description: "",
-        id: "",
         warehouseID: "",
 
     });
@@ -53,16 +51,18 @@ const AddInventory = () => {
             }
             else {
                 setInStock(false);
+                setQuantityError(false);
             }
         }
     }
 
-    const handleSave = e => {
+    const handleSave = async e => {
         e.preventDefault();
-        console.log(e.target);
         
         e.target[0].classList.remove('error-state');
         e.target[1].classList.remove('error-state');
+        e.target[2].classList.remove('error-state');
+        e.target[6].classList.remove('error-state');
         e.target[5].classList.remove('error-state');
 
         let emptyValue = false;
@@ -80,6 +80,20 @@ const AddInventory = () => {
         } else {
             setDescError(false);
         }
+        if (e.target[2].value === '') {
+            e.target[2].classList.add('error-state');
+            setCatError(true);
+            emptyValue = true;
+        } else {
+            setCatError(false);
+        }
+        if (e.target[6].value === '') {
+            e.target[6].classList.add('error-state');
+            setWhError(true);
+            emptyValue = true;
+        } else {
+            setWhError(false);
+        }
         if (e.target[5].value <= '0' && itemDetails.status === 'In Stock') {
             e.target[5].classList.add('error-state');
             setQuantityError(true);
@@ -92,11 +106,15 @@ const AddInventory = () => {
             return false;
         }
         
-        console.log(itemDetails);
+        
         if (window.confirm('Are you sure you want to add this Inventory Item?')) {
-            
-            axios.post(`http://localhost:8080/inventory/`, itemDetails).then(res => console.log(res)).catch(err => console.log(err));
-            history.push(`/inventory/${params.id}`);
+            let detailsToSend = itemDetails;
+            if(detailsToSend.status === "Out Of Stock") {
+                detailsToSend.quantity = 0;
+            }    
+
+            await axios.post(`http://localhost:8080/inventory/`, detailsToSend).then(res => console.log(res)).catch(err => console.log(err));
+            history.push(`/inventory`);
         };
     }
 
@@ -106,12 +124,10 @@ const AddInventory = () => {
         }
     }
 
-
-    console.log( nameError, descError, quantityError);
     return (
         <section className='inv-add__wrapper'>
             <div className='inv-add__header-wrapper'>
-                    <Link to = {`/inventory/${params.id}`}>
+                    <Link to = {`/inventory`}>
                         <div className='inv-add__back'></div>
                     </Link>
                     <h1 className='inv-add__item'>Add New Inventory Item</h1>
@@ -134,7 +150,7 @@ const AddInventory = () => {
                         </div>
                         <h3 className='inv-add__subtitle'>Category</h3>
                         <select className='inv-add__category' name='category' value={itemDetails.category} onChange={handleFormChange}>
-                            <option className='placeholder' value="" disabled hidden>Please Select</option>
+                            <option value="" disabled hidden>Please Select</option>
                             <option value="Accessories">Accessories</option>                        
                             <option value="Apparel">Apparel</option>
                             <option value="Electronics">Electronics</option>
@@ -172,7 +188,7 @@ const AddInventory = () => {
                         <div className='inv-add__right-bottom'>
                             <h3 className='inv-add__subtitle'>Warehouse</h3>
                             <select className='inv-add__warehouse' name='warehouseName' value={itemDetails.warehouseName} onChange={handleFormChange}>
-                                <option className='placeholder' value="" disabled hidden>Please Select</option>
+                                <option value="" disabled hidden>Please Select</option>
                                 {Array.isArray(warehouses) ? (warehouses.map((w) => (
                                     <option value={w.name} key={w.id}>{w.name}</option>
                                 ))) : (<option>loading...</option>)}
