@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import Footer from "../../Components/Footer/Footer";
+import EditWarehouse from "../../Components/EditWarehouse/EditWarehouse.jsx";
 import PageHeader from "../../Components/Header/Header";
 import WarehouseList from "../../Components/WarehouseList/WarehouseList";
 import './WarehousePage.scss'
@@ -7,15 +7,16 @@ import './WarehousePage.scss'
 function WarehousePage()  {
 
 
-    return (<>
+    return (
+    <>
         <PageHeader isActive='Warehouse' />
         <div className="component-wrapper">
                 <Switch>
                     <Route path='/' exact component={WarehouseList} />
                     <Route path='/warehouse' exact component={WarehouseList} />
                     <Route path='/warehouse/add'  component='' />
+                    <Route path='/warehouse/edit/:id' component={EditWarehouse} />
                     <Route path='/warehouse/:id'  component='' />
-                    <Route path='/warehouse/edit/:id'  component='' />
                 </Switch>
         </div>
     </>)
