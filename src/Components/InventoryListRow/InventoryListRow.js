@@ -3,12 +3,15 @@ import ChevronIcon from '../../Assets/Icons/chevron_right-24px.svg'
 import BinIcon from '../../Assets/Icons/delete_outline-24px.svg'
 import PencilIcon from '../../Assets/Icons/edit-24px.svg'
 import { Link } from 'react-router-dom'
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
+import axios from "axios";
 
+import ModalDialog from './../ModalDialog/ModalDialog.jsx';
 
 const InventoryListRow = (props) => {  
 
     const statusTextElement = useRef([])
+    const [showModalDialog, setShowModalDialog] = useState(false);
 
     useEffect(()=>{
         if (props.status === 'In Stock'){
@@ -18,8 +21,34 @@ const InventoryListRow = (props) => {
         }
     })
 
+    const openModalDialog = () => {
+        setShowModalDialog(true);
+    }
+
+    const closeModalDialog = () => {
+        setShowModalDialog(false);
+    }
+
+    const deleteInventoryCallback = async () => {
+        const response = await axios.delete(`http://localhost:8080/inventory/${props.itemID}`);
+
+        if (response.data?.deleteInventory) {
+            props.onDataChange();
+        }
+
+        setShowModalDialog(false);
+    }
+
+
     return(
         <>
+            <ModalDialog 
+                showModalDialog={showModalDialog}
+                title={`Delete ${props.item} inventory item?`}
+                content={`Please confirm that you'd like to delete ${props.item} from the inventory list. You won't be able to undo this action.`}
+                onCancel={closeModalDialog}
+                onDelete={deleteInventoryCallback}>
+            </ModalDialog>
             <div className='inventoryListRow'>
                 <div className='inventoryListRow__container inventoryListRow__container--primary'>
                     <div className='inventoryListRow__header-container'>
@@ -65,7 +94,7 @@ const InventoryListRow = (props) => {
                     </div>
                 </div>
                 <div className='inventoryListRow__container inventoryListRow__container--senary'>
-                    <img className='inventoryListRow__image' src={BinIcon} alt="Garbage Bin Icon Button" />
+                    <img className='inventoryListRow__image' src={BinIcon} onClick={openModalDialog} alt="Garbage Bin Icon Button" />
                     <Link className='inventoryListRow__link-edit' to={`/inventory/edit/${props.itemID}`}>    
                         <img className='inventoryListRow__image' src={PencilIcon} alt="Pencil Icon Button" />
                     </Link>

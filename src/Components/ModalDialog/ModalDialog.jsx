@@ -7,6 +7,7 @@ const ModalDialog = (props) => {
     
     return (
         <ReactModal
+            ariaHideApp={ false}
             className={'modal-dialog'}
             overlayClassName={'modal-dialog__overlay'}
             isOpen={props.showModalDialog}
