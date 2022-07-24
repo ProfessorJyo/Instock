@@ -15,7 +15,7 @@ const EditInventory = () => {
         quantity: 0,
         description: "",
         id: "",
-        warehouseId: "",
+        warehouseID: "",
 
     });
     const [warehouses, setWarehouses] = useState({});
@@ -46,13 +46,18 @@ const EditInventory = () => {
     }
 
     const handleFormChange = e => {
-
+        // update item details
         if (e.target.name === 'warehouseName') {
-                const wh = warehouses.filter(wh => wh.name === e.target.value);
-                console.log(wh[0].id);
-                setItemDetails({...itemDetails, warehouseId: wh[0].id});
+           
+            const wh = warehouses.filter(wh => wh.name === e.target.value);
+            setItemDetails({...itemDetails, warehouseID: wh[0].id, [e.target.name]: e.target.value});
+        } 
+        else {
+            
+            setItemDetails({...itemDetails, [e.target.name]: e.target.value});
         }
-        setItemDetails({...itemDetails, [e.target.name]: e.target.value});
+
+        //update stock status as well
         if (e.target.name === 'status') {
             if(e.target.value === "In Stock") {
                 setInStock(true);
@@ -107,7 +112,7 @@ const EditInventory = () => {
     }
 
     const handleCancel = () => {
-        if(window.confirm('Are yo sure you want to cancel and go back to the previous page?')) {
+        if(window.confirm('Are you sure you want to cancel and go to the Inventory Detail page?')) {
             history.push(`/inventory/${params.id}`);
         }
     }
