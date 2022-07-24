@@ -1,4 +1,5 @@
 import { Switch, Route } from "react-router-dom";
+import EditWarehouse from "../../Components/EditWarehouse/EditWarehouse";
 import Footer from "../../Components/Footer/Footer";
 import PageHeader from "../../Components/Header/Header";
 import WarehouseList from "../../Components/WarehouseList/WarehouseList";
@@ -15,7 +16,7 @@ function WarehousePage()  {
                     <Route path='/warehouse' exact component={WarehouseList} />
                     <Route path='/warehouse/add'  component='' />
                     <Route path='/warehouse/:id'  component='' />
-                    <Route path='/warehouse/edit/:id'  component='' />
+                    <Route path='/warehouse/edit/:id'  component={EditWarehouse} />
                 </Switch>
         </div>
     </>)
