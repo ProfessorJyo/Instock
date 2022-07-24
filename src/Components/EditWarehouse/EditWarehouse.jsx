@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import "./EditWarehouse.scss";
-// import axios from 'axios';
+import axios from 'axios';
 import errorIcon from '../../Assets/Icons/error-24px.svg'
 
 const EditWarehouse = () => {
@@ -12,6 +12,7 @@ const EditWarehouse = () => {
         name: "",
         address: "",
         city: "",
+        country: "",
         contact: {
             name: "",
             position: "",
@@ -20,56 +21,29 @@ const EditWarehouse = () => {
         }
     });
     
-    /* const [inStock, setInStock] = useState(true);
-    
-    const [warehouses, setWarehouses] = useState({});
+    /* 
     const [descError, setDescError] = useState(false);
     const [quantityError, setQuantityError] = useState(false); */
 
-    /* useEffect (() => {
-        axios.get(`http://localhost:8080/inventory/${params.id}`).then(res => {
-            setItemDetails(res.data[0]);
-            updateTheStock(res.data[0]);
+    useEffect (() => {
+        axios.get(`http://localhost:8080/warehouse/${params.id}`).then(res => {
+            const updatedItemDetails = {};
+            
+            for (const key in itemDetails) {
+                if (key in res.data) {
+                    updatedItemDetails[key] = res.data[key];
+                }
+            }
+
+            setItemDetails(updatedItemDetails);
         }).catch(err => {
             console.log(err);
         });
-        axios.get(`http://localhost:8080/warehouse/`).then(res => {
-            setWarehouses(res.data);   
-        });
 
-    }, [params]); */
-
-    /* const updateTheStock = details => {
-        if(details.status === "In Stock" && details.quantity > 0) {
-            setInStock(true);
-        }
-        else {
-            setInStock(false);
-        }
-    } */
-
-    /* const handleFormChange = e => {
-
-        if (e.target.name === 'warehouseName') {
-                const wh = warehouses.filter(wh => wh.name === e.target.value);
-                console.log(wh[0].id);
-                const updatedItemDetails = {...itemDetails }
-                updatedItemDetails['warehouseID'] = wh[0].id;
-                updatedItemDetails['warehouseName'] = e.target.value;
-                setItemDetails(updatedItemDetails);
-        } else if (e.target.name === 'status') {
-            if(e.target.value === "In Stock") {
-                setInStock(true);
-            }
-            else {
-                setInStock(false);
-            }
-        } else {
-            setItemDetails({...itemDetails, [e.target.name]: e.target.value});
-        }
-    } */
+    }, [params]);
 
     const handleFormChange = e => {
+        setItemDetails({...itemDetails, [e.target.name]: e.target.value});
     }
     
     const handleCancel = () => {
@@ -127,12 +101,10 @@ const EditWarehouse = () => {
         }
     } */
 
-
-    // console.log( nameError, descError, quantityError);
     return (
         <section className='warehouse-edit__wrapper'>
             <div className='warehouse-edit__header-wrapper'>
-                    <Link to = {`/inventory/${params.id}`}>
+                    <Link to = {`/warehouse/${params.id}`}>
                         <div className='warehouse-edit__back'></div>
                     </Link>
                     <h1 className='warehouse-edit__item'>Edit Warehouse</h1>
