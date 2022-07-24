@@ -3,6 +3,7 @@
 @use '../../Styles/Partials/fonts' as*;
 
 .searchHeader{
+    border: 10px blue solid;
 
     &__header-container{
         display: flex;

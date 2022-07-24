@@ -3,6 +3,7 @@
 @use '../../Styles/Partials/fonts' as *;
 
 .inv-details {
+    border: 10px red solid;
     @include tablet {
         padding: 1.5rem 2rem;
         display: flex;

@@ -51,3 +51,9 @@
         width: auto;
     }
 } 
+
+@mixin button-cta{
+    background-color: $color-instock-indigo;
+    color:$color-white
+
+}

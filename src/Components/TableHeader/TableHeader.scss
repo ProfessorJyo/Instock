@@ -4,6 +4,7 @@
 
 .tableHeader{
     display: none;
+    border: 10px orange solid;
 
     @include tablet {
         display: flex;

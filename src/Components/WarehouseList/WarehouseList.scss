@@ -3,6 +3,7 @@
 @use '../../Styles/Partials/fonts' as*;
 
 .warehouseList {
+    border: green 10px solid;
 
     &__wrapper-container {
         background-color: $color-white;

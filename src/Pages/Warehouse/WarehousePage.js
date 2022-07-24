@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import PageHeader from "../../Components/Header/Header";
 import WarehouseList from "../../Components/WarehouseList/WarehouseList";
+import WarehouseDetails from "../../Components/WarehouseDetails/WarehouseDetails"
 import './WarehousePage.scss'
 
 function WarehousePage()  {
@@ -14,7 +15,7 @@ function WarehousePage()  {
                     <Route path='/' exact component={WarehouseList} />
                     <Route path='/warehouse' exact component={WarehouseList} />
                     <Route path='/warehouse/add'  component='' />
-                    <Route path='/warehouse/:id'  component='' />
+                    <Route path='/warehouse/:id'  component={WarehouseDetails} />
                     <Route path='/warehouse/edit/:id'  component='' />
                 </Switch>
         </div>
