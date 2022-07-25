@@ -78,7 +78,9 @@ const WarehouseRow = (props) => {
                 </div>
                 <div className='warehouseRow__container warehouseRow__container--senary'>
                     <img className='warehouseRow__image' src={BinIcon} onClick={openModalDialog}  alt="Garbage Bin Icon Button" />
-                    <img className='warehouseRow__image' src={PencilIcon} alt="Pencil Icon Button" />
+                    <Link className='warehouseRow__link-edit' to={`/warehouse/edit/${props.id}`}>
+                        <img className='warehouseRow__image' src={PencilIcon} alt="Pencil Icon Button" />
+                    </Link>
                 </div>
             </div>
         </>
