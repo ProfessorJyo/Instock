@@ -44,7 +44,7 @@ const WarehouseDetails = () =>{
     }, [params])
 
     return(
-        <div className='warehouseDetails__main'>
+        <div className='warehouseDetail__main'>
         <section className="warehouseDetail__wrapper">
             <div className='inv-details__header-wrapper'>
                 <div className='inv-details__header-left'>
@@ -63,12 +63,13 @@ const WarehouseDetails = () =>{
                     </Link>
                 </div>
             </div>
+            <div className='warehouseDetail__container--all'>
             <div className="warehouseDetail__detail-container warehouseDetail__detail-container--primary">
                 <h4 className="warehouseDetail__title">WAREHOUSE ADDRESS: </h4>
                 <p className="warehouseDetail__text">{data.address}</p>
                 <p className="warehouseDetail__text">{data.city} , {data.country}</p>  
             </div>
-            <div className='warehouseDetails-flex'>
+            <div className='warehouseDetail-flex'>
             <div className="warehouseDetail__detail-container">
                 <h4 className="warehouseDetail__title">CONTACT NAME:</h4>
                 <p className="warehouseDetail__text">{data.contact.name}</p>
@@ -79,6 +80,7 @@ const WarehouseDetails = () =>{
                 <h4 className="warehouseDetail__title">CONTACT INFORMATION: </h4>
                 <p className="warehouseDetail__text">{data.contact.phone}</p>
                 <p className="warehouseDetail__text">{data.contact.email}</p>
+            </div>
             </div>
             </div>
             </section>

@@ -33,6 +33,13 @@
         }
     }
 
+    &__container--all{
+        @include tablet{
+        display: flex;
+        }
+
+    }
+
     &__detail-wrapper{
         @include tablet {
         display: flex;
@@ -41,21 +48,26 @@
     }
 
     &__detail-container{
-        width: 50%;
+        // width: 50%;
         margin-top: 1.5rem;
 
         @include tablet{
-            width: 40%;
-            margin: 0 0 0 2.5rem;
+            // width: 30%;
         }
 
         &--primary{
 
             @include tablet{
-                width: 60%;
+                width: 40%;
                 border-right: 1px solid $color-cloud;
+                margin: 1.5rem 0 0 2.5rem;
             }
         }
+    }
+
+    &-flex {
+        display: flex;
+        justify-content: space-around;
     }
 
     &__title{
@@ -72,8 +84,12 @@
 
     &-flex {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100%;
+
+        @include tablet {
+            justify-content: space-around;
+        }
     }
 
 }
