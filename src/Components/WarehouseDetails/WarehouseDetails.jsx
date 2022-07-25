@@ -81,16 +81,17 @@ const WarehouseDetails = () =>{
             </div>
             </section>
             <TableHeader
-            className={'warehouseList'}
-            firstHeader={'Inventory Item'} 
-            secondHeader={'Category'} 
-            thirdHeader={'Status'} 
-            fourthHeader={'Qty'} 
+            className={'warehouseDetails'}
+            firstHeader={'INVENTORY ITEM'} 
+            secondHeader={'CATEGORY'} 
+            thirdHeader={'STATUS'} 
+            fourthHeader={'QUANTITY'} 
             fifthHeader={null}
             sixthHeader={'ACTIONS'}/>
             {data.warehouseInventory.map((singleInventory) => {
                 return <InventoryListRow
                 itemID={singleInventory.id}
+                className={"warehouseDetails"}
                 item={singleInventory.itemName}
                 category={singleInventory.category}
                 description={singleInventory.description}

@@ -35,6 +35,7 @@ const InventoryList = () =>{
                 {data.map((singleInventory) => {
                     return <InventoryListRow 
                     itemID={singleInventory.id}
+                    className={"inventoryListRow"}
                     item={singleInventory.itemName}
                     warehouseName={singleInventory.warehouseName}
                     category={singleInventory.category}

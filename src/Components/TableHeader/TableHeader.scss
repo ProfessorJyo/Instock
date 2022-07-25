@@ -63,6 +63,26 @@
             }
         }
 
+        // Header styling only for WarehouseDetails
+
+        &__warehouseDetails-container{
+            &--primary{
+                width: 18%;  
+            }
+            &--secondary{
+                width: 18%;
+            }
+            &--tertiary{
+                width: 20%;
+            }
+            &--quaternary{
+                width: 26%;
+            }
+            &--senary{
+                width: 9%;
+            }
+        }
+
         &__title{
             color: $color-slate;
             font-size: .875rem;

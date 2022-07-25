@@ -155,6 +155,25 @@
                 width: 9%;
             }
         }
+            // new class for warehouseDetails styling
+
+        &__warehouseDetails-container{
+            &--primary{
+                width: 18%;  
+            }
+            &--secondary{
+                width: 18%;
+            }
+            &--tertiary{
+                width: 20%;
+            }
+            &--quaternary{
+                width: 26%;
+            }
+            &--senary{
+                width: 9%;
+            }
+        }
 
         &__header-container{
             display: none;
