@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import EditWarehouse from "../../Components/EditWarehouse/EditWarehouse.jsx";
 import PageHeader from "../../Components/Header/Header";
 import WarehouseList from "../../Components/WarehouseList/WarehouseList";
+import WarehouseDetails from "../../Components/WarehouseDetails/WarehouseDetails.jsx";
 import './WarehousePage.scss'
 
 function WarehousePage()  {
@@ -16,7 +17,7 @@ function WarehousePage()  {
                     <Route path='/warehouse' exact component={WarehouseList} />
                     <Route path='/warehouse/add'  component='' />
                     <Route path='/warehouse/edit/:id' component={EditWarehouse} />
-                    <Route path='/warehouse/:id'  component='' />
+                    <Route path='/warehouse/:id'  component={WarehouseDetails} />
                 </Switch>
         </div>
     </>)
