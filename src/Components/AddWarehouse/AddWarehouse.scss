@@ -2,169 +2,205 @@
 @use '../../Styles/Partials/mixins';
 
 .component-wrapper {
-  background-color: variables.$color-white;
-  position: relative;
-  z-index: 1;
-  margin: -4rem 1rem 0;
-  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
-  border-radius: 0.1875rem;
+  .add-warehouse {
+    width: 100%;
 
-  @include mixins.tablet {
-    margin: -5.75rem 2.25rem 0;
-  }
+    &__wrapper {
+      background-color: variables.$color-white;
+      position: relative;
+      z-index: 1;
+      margin: -4.75rem 1rem 0;
+      box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+      border-radius: 3px;
 
-  @include mixins.desktop {
-    margin: -5.75rem calc((100vw - 63.75rem) / 2) 0;
-  }
-  .content-wrapper {
-    position: relative;
-    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
-    background-color: variables.$color-white;
-  }
-
-  @include mixins.desktop {
-    background-color: variables.$color-white;
-    position: relative;
-    z-index: 1;
-    margin: -4rem 1rem 0;
-    padding: 0;
-    border-radius: 3px;
-
-    @include mixins.tablet {
-      margin: -5.75rem 2.25rem 0;
-    }
-
-    @include mixins.desktop {
-      margin: -5.75rem calc((100vw - 63.75rem) / 2) 0;
-    }
-    // margin: -4rem 11.7rem 0;
-    // width: 70%;
-  }
-
-  &__heading {
-    padding-left: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-bottom: 1px solid variables.$color-cloud;
-  }
-
-  .header {
-    padding-left: 0.5rem;
-  }
-
-  .warehouse-details {
-    margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    @include mixins.desktop {
-      width: 100%;
-    }
-
-    @include mixins.desktop {
-    }
-
-    &__container {
       @include mixins.tablet {
-        display: flex;
-        justify-content: space-around;
+        margin: -5.75rem 2.25rem 0;
+      }
+
+      @include mixins.desktop {
+        margin: -5.75rem calc((100vw - 63.75rem) / 2) 0;
+      }
+      position: relative;
+      background-color: variables.$color-white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__add-wh-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0 1.5rem;
+      border-bottom: 1px solid variables.$color-cloud;
+
+      @include mixins.tablet {
+        padding-left: 1rem;
         border-bottom: 1px solid variables.$color-cloud;
       }
     }
 
-    &__heading {
-      padding: 0 1rem 0 1rem;
+    &__add-wh-heading {
+      padding-left: 1rem;
     }
-    &__contact-heading {
-      padding: 0 1rem 0 1rem;
+
+    &__wh-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__details-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0 1.5rem;
+
+      @include mixins.tablet {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 1rem;
+      }
     }
 
     &__warehouse-form {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid variables.$color-cloud;
-      padding-bottom: 3rem;
-      padding: 0 1rem 1.5rem 1rem;
+
       @include mixins.tablet {
-        width: 45%;
-        border-right: 1px solid variables.$color-cloud;
-        border-bottom: none;
-      }
-      @include mixins.desktop {
         width: 50%;
+        padding: 0 1rem;
+        :before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 1px;
+          height: 70%;
+        }
       }
+    }
+
+    &__warehouse-heading {
+      padding-left: 0.5rem;
+    }
+
+    &__contact-heading {
+      padding-left: 0.5rem;
     }
 
     &__contact-form {
       display: flex;
       flex-direction: column;
-      padding-bottom: 3rem;
-      padding: 0 1rem 1.5rem 1rem;
+
       @include mixins.tablet {
-        width: 45%;
-      }
-      @include mixins.desktop {
         width: 50%;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
+        border-left: 1px solid variables.$color-cloud;
       }
     }
-
-    .button-section {
-      width: 100%;
+    &__button-section {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       background-color: variables.$color-light-grey;
+      padding: 0 1.5rem;
+
       @include mixins.tablet {
         justify-content: flex-end;
       }
-      @include mixins.desktop {
-        width: 100%;
-        // padding: 0 16px;
-      }
+    }
+  }
 
-      a {
-        color: variables.$color-instock-black;
-        background-color: variables.$color-white;
-        text-decoration: none;
-        height: 2.5rem;
-        width: 45%;
-        margin: 2.5rem 1rem;
+  .add-wh {
+    &__form {
+      height: 1.7rem;
+      margin: 0.5rem 0.5rem;
+      border-radius: 1rem;
+      border-color: variables.$color-cloud;
+      box-shadow: none;
+      padding-left: 0.625rem;
+    }
 
-        border-radius: 1.875rem;
-        border: 1px solid variables.$color-slate;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    &__form-error {
+      height: 1.7rem;
+      margin: 0.5rem 0.5rem;
+      border-radius: 1rem;
+      border-color: variables.$color-red;
+      box-shadow: none;
+      padding-left: 0.625rem;
+    }
+    .before-form {
+      border-color: variables.$color-cloud;
+    }
+  }
 
-        @include mixins.tablet {
-          width: 15%;
-          margin: 1rem;
-        }
-      }
+  #submit-button {
+    color: variables.$color-white;
+    background-color: variables.$color-instock-indigo;
+    height: 2.5rem;
+    width: 45%;
+    margin: 2.5rem 0;
+    border-radius: 1rem;
+
+    @include mixins.tablet {
+      width: 20%;
+      margin: 1rem;
+    }
+
+    @include mixins.desktop {
+      width: 15%;
+      height: 2rem;
+    }
+  }
+
+  .cancel-link {
+    color: variables.$color-instock-black;
+    background-color: variables.$color-white;
+    text-decoration: none;
+    height: 2.5rem;
+    width: 45%;
+    margin: 2.5rem 1rem 2.5rem 0.5rem;
+
+    border-radius: 1.875rem;
+    border: 1px solid variables.$color-slate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mixins.tablet {
+      width: 15%;
+      margin: 1rem;
+    }
+
+    @include mixins.desktop {
+      width: 10%;
+      height: 2rem;
     }
   }
 }
-.form {
-  height: 1.87rem;
-  border-radius: 1.87rem;
-  border-color: variables.$color-cloud;
-  box-shadow: none;
-  padding-left: 0.625rem;
-}
-.form-error {
-  border-color: variables.$color-red;
+
+.wh-form {
+  &__label {
+    margin-left: 0.5rem;
+  }
 }
 
-#submit-button {
-  color: variables.$color-white;
-  background-color: variables.$color-instock-indigo;
-  height: 2.5rem;
-  width: 45%;
-  margin: 2.5rem 0;
-  border-radius: 1.875rem;
-  @include mixins.tablet {
-    width: 20%;
-    margin: 1rem;
-  }
+.error-msg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0.5rem;
+  height: 1.87rem;
+}
+
+.hidden-err-msg {
+  visibility: hidden;
+  height: 1.87rem;
+}
+.warning-text {
+  font-size: 0.81rem;
+  padding-left: 8px;
+}
+
+.warning-icon {
+  height: 1.3rem;
 }

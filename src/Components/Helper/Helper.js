@@ -1,5 +1,6 @@
-export const eMailValidator = (email) => {
+export const emailValidator = (email) => {
   const emailFormat = /\S+@\S+\.\S+/;
+
   return emailFormat.test(email);
 };
 

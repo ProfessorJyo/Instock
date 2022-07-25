@@ -2,140 +2,273 @@ import './AddWarehouse.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import arrowIcon from '../../Assets/Icons/arrow_back-24px.svg';
-import { eMailValidator, phoneValidator } from '../Helper/Helper';
+import warningIcon from '../../Assets/Icons/error-24px.svg';
+import { emailValidator, phoneValidator, valueCheck } from '../Helper/Helper';
+import { useState, useEffect } from 'react';
 
 const AddWarehouse = () => {
+  const [inputState, setInputState] = useState([]);
+  const [fieldRequiredMessage, setFieldRequiredMessage] = useState({});
+
+  const errorHandler = (e) => {
+    const form = e.target.value;
+
+    setInputState({ ...inputState, [e.target.name]: form });
+
+    // updating state for error message display
+
+    if (form.value !== '') {
+      setFieldRequiredMessage({ ...fieldRequiredMessage, [e.target.name]: e.target.value });
+    } else if (form.value === '') {
+      setFieldRequiredMessage({ ...fieldRequiredMessage, [e.target.name]: undefined });
+    }
+  };
+
   const dataHandler = (e) => {
     e.preventDefault();
 
-    // evaluation of inputs
-    if (
-      !e.target[0].value === '' ||
-      e.target[1].value === '' ||
-      e.target[2].value === '' ||
-      e.target[3].value === '' ||
-      e.target[4].value === '' ||
-      e.target[5].value === '' ||
-      e.target[6].value === '' ||
-      e.target[7].value === ''
-    ) {
-      const form = document.querySelector('.form').classList.add('.form-error');
-      // console.log(form);
-      alert('All forms must be filled up');
-    }
+    const phoneChecker = phoneValidator(inputState.phone);
     // Phone validation
-    phoneValidator(e.target[6].value);
 
     // E-mail validator
+    const emailChecker = emailValidator(inputState.email);
 
-    eMailValidator(e.target[7].value);
+    // Axios post request
+    if (phoneChecker && emailChecker) {
+      const warehouseData = {
+        name: e.target[0].value,
+        address: e.target[1].value,
+        city: e.target[2].value,
+        country: e.target[3].value,
+        contact: {
+          name: e.target[4].value,
+          position: e.target[5].value,
+          phone: e.target[6].value,
+          email: e.target[7].value,
+        },
+      };
 
-    if (!phoneValidator && !eMailValidator) {
-      alert('Please enter proper phone or email format');
+      const warehousePostCall = axios.post('http://localhost:8080/warehouse', warehouseData);
+      warehousePostCall
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-
-    const warehouse = {
-      name: e.target[0].value,
-      address: e.target[1].value,
-      city: e.target[2].value,
-      country: e.target[3].value,
-      contact: {
-        name: e.target[4].value,
-        position: e.target[5].value,
-        phone: e.target[6].value,
-        email: e.target[7].value,
-      },
-    };
-
-    // post call for a new warehouse (Used an endpoint created on a backend)
-    const warehousePostCall = axios.post('http://localhost:8080/warehouse', warehouse);
-    warehousePostCall
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (
     <>
-      <div className='content-wrapper'>
-        <div className='component-wrapper__heading'>
+      <section className='add-warehouse__wrapper'>
+        <div className='add-warehouse__add-wh-header'>
           <Link to='/warehouse'>
             <img src={arrowIcon} />
           </Link>
-          <h1 className='header'>Add a New Warehouse</h1>
+          <h1 className='add-warehouse__add-wh-heading'>Add a New Warehouse</h1>
         </div>
-        <form className='warehouse-details' onSubmit={dataHandler}>
-          <div className='warehouse-details__container'>
-            <div className='warehouse-details__warehouse-form'>
-              <h2 className='warehouse-details__heading'>Warehouse details</h2>
-              <label htmlFor='name-form'>Warehouse name</label>
+        <form className='add-warehouse__wh-details' onSubmit={dataHandler}>
+          <div className='add-warehouse__details-container'>
+            <div className='add-warehouse__warehouse-form'>
+              <h2 className='add-warehouse__warehouse-heading'>Warehouse details</h2>
+              <label className='wh-form__label' htmlFor='name-form'>
+                Warehouse name
+              </label>
               <input
                 type='text'
-                className='form'
+                className={
+                  fieldRequiredMessage.warehouseName === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='name-form'
-                name='warehouse-name'
+                name='warehouseName'
                 placeholder='Warehouse name'
               />
-              <label htmlFor='street-form'>Street Address</label>
+              <div
+                className={
+                  fieldRequiredMessage.warehouseName === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='street-form'>
+                Street Address
+              </label>
               <input
                 type='text'
-                className='form'
+                className={
+                  fieldRequiredMessage.address === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='street-form'
-                name='Street-address'
+                name='address'
                 placeholder='Street Address'
               />
-              <label htmlFor='city'>City</label>
-              <input type='text' className='form' id='city-form' name='City' placeholder='City' />
-              <label htmlFor='country-form'>Country</label>
+              <div
+                className={
+                  fieldRequiredMessage.address === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='city'>
+                City
+              </label>
               <input
                 type='text'
-                className='form'
+                className={
+                  fieldRequiredMessage.city === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
+                id='city-form'
+                name='city'
+                placeholder='City'
+              />
+              <div
+                className={fieldRequiredMessage.city === undefined ? 'error-msg' : 'hidden-err-msg'}
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='country-form'>
+                Country
+              </label>
+              <input
+                type='text'
+                className={
+                  fieldRequiredMessage.country === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='country-form'
-                name='Country'
+                name='country'
                 placeholder='Country'
               />
+              <div
+                className={
+                  fieldRequiredMessage.country === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
             </div>
 
-            <div className='warehouse-details__contact-form'>
-              <h2 className='warehouse-details__contact-heading'>Contact details</h2>
-              <label htmlFor='contact-name-form'>Contact name</label>
+            <div className='add-warehouse__contact-form'>
+              <h2 className='add-warehouse__contact-heading'>Contact details</h2>
+              <label className='wh-form__label' htmlFor='contact-name-form'>
+                Contact name
+              </label>
               <input
                 type='text'
-                className='form'
+                className={
+                  fieldRequiredMessage.contact === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='contact-name-form'
-                name='contact-name'
+                name='contact'
                 placeholder='Contact name'
               />
-              <label htmlFor='position-form'>Position</label>
+              <div
+                className={
+                  fieldRequiredMessage.contact === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='position-form'>
+                Position
+              </label>
               <input
                 type='text'
-                className='form'
+                className={
+                  fieldRequiredMessage.position === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='position-form'
-                name='Street-address'
+                name='position'
                 placeholder='Position'
               />
-              <label htmlFor='phone-number-form'>Phone number</label>
+              <div
+                className={
+                  fieldRequiredMessage.position === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='phone-number-form'>
+                Phone number
+              </label>
               <input
                 type='tel'
-                // pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-                className='form'
+                className={
+                  fieldRequiredMessage.phone === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
                 id='phone-number-form'
-                name='City'
+                name='phone'
                 placeholder='Phone number'
               />
-              <label htmlFor='email-form'>Email</label>
-              <input type='text' className='form' id='email-form' name='City' placeholder='Email' />
+              <div
+                className={
+                  fieldRequiredMessage.phone === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
+              <label className='wh-form__label' htmlFor='email-form'>
+                Email
+              </label>
+              <input
+                type='text'
+                className={
+                  fieldRequiredMessage.email === undefined
+                    ? 'add-wh__form-error'
+                    : 'add-wh__form before-form'
+                }
+                onChange={errorHandler}
+                id='email-form'
+                name='email'
+                placeholder='Email'
+              />
+              <div
+                className={
+                  fieldRequiredMessage.email === undefined ? 'error-msg' : 'hidden-err-msg'
+                }
+              >
+                <img src={warningIcon} className='warning-icon' alt='warning' />
+                <p className='warning-text'>This field is required</p>
+              </div>
             </div>
           </div>
-          <div className='button-section'>
-            <Link to='/warehouse'>Cancel</Link>
+          <div className='add-warehouse__button-section'>
+            <Link className='cancel-link' to='/warehouse'>
+              Cancel
+            </Link>
+
             <input type='submit' id='submit-button' value='+ Add warehouse' />
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 };
